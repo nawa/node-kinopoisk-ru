@@ -1,4 +1,4 @@
-Node.js module for getting film info from [kinopoisk.ru]
+Node.js module for getting film info from [kinopoisk.ru], searhing films by query. Operations support login to avoid a ban when you do many requests
 
 ##Usage
 ```javascript
