@@ -1,4 +1,4 @@
-Node.js library for getting film info from [kinopoisk.ru]
+Node.js module for getting film info from [kinopoisk.ru]
 
 ##Usage
 ```javascript
@@ -60,7 +60,8 @@ That is simple, available only three functions
 ```javascript
 { loginData: [], //login data from login(user, password, callback) function. Can be null or empty
   limit: 5, //result limit
-  parse: true, //parse or not resulting films. If true then results will be parsed like in getById(). If false then only films ids will be returned
+  parse: true, 	//parse or not resulting films. If true then results will be parsed like in getById(). 
+  		//If false then only films id and title will be returned
   parsingOptions: DEFAULT_GET_OPTIONS //Used only if parse is true. Similar to options in getById()
 }
 ```
@@ -68,8 +69,8 @@ That is simple, available only three functions
 
 ###login(user, password, callback)
 To avoid a ban when you do many requests use login with your kinopoisk credentials
-* `user` - film name
-* `password` - if null the default options will be passed. Options contains next values
+* `user` - kinopoisk user name
+* `password` - kinopoisk user password
 * `callback(err, loginData)` - `loginData` must be passed to *getById()* or *search()*  options
 
 **Example**
