@@ -1,6 +1,6 @@
 {
   "name": "kinopoisk-ru",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Getting film info from kinopoisk.ru, searhing films by query. Operations support login to avoid a ban when you do many requests",
   "main": "./lib/kinopoisk.js",
   "scripts": {
