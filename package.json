@@ -1,10 +1,10 @@
 {
   "name": "kinopoisk-ru",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Getting film info from kinopoisk.ru, searhing films by query. Operations support login to avoid a ban when you do many requests",
   "main": "./lib/kinopoisk.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha --timeout 30000 ./test"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,13 @@
   },
   "homepage": "https://github.com/nawa/node-kinopoisk-ru",
   "dependencies": {
-    "request": "~2.36.0",
-    "async": "~0.9.0",
-    "cheerio": "~0.17.0",
-    "iconv": "~2.1.4"
+    "bluebird": "^3.3.5",
+    "cheerio": "^0.20.0",
+    "iconv-lite": "^0.4.13",
+    "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
   }
 }
