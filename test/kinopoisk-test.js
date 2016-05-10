@@ -122,6 +122,26 @@ describe('Kinopoisk module', function () {
 
     });
   });
+
+  describe('bug from https://github.com/nawa/node-kinopoisk-ru/issues/1', function () {
+    it('should successfully search movie "Волки и овцы: бе-е-е-зумное превращение"', function () {
+      return kinopoisk.searchAsync('Волки и овцы: бе-е-е-зумное превращение', options).then(function (result) {
+        expect(result).to.have.length(options.limit);
+        expect(result[0]).to.have.property('title').that.eql('Волки и овцы: бе-е-е-зумное превращение');
+        expect(result[0]).to.have.property('id').that.eql('738950');
+      });
+    });
+
+    it('should successfully search movie "Белоснежка и охотник 2"', function () {
+      return kinopoisk.searchAsync('Белоснежка и охотник 2', options).then(function (result) {
+        expect(result).to.have.length(options.limit);
+        expect(result[0]).to.have.property('title').that.eql('Белоснежка и Охотник 2');
+        expect(result[0]).to.have.property('id').that.eql('680394');
+      });
+    });
+
+
+  });
 });
 
 function assertShawshankMovie(movie) {
