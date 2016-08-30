@@ -33,19 +33,45 @@ var options = {
 
 describe('Kinopoisk module', function () {
 
+  this.timeout(30000);
+
+  var optionsWithLogin = JSON.parse(JSON.stringify(options));
+
+  before(function () {
+    return kinopoisk.loginAsync(KINOPOISK_USERNAME, KINOPOISK_USERPASSWORD).then(function (result) {
+      optionsWithLogin.loginData = result;
+      optionsWithLogin.parsingOptions.loginData = result;
+    });
+  });
+
+  // describe('stress', function () {
+  //   it('stress test', function () {
+  //     var attempts = [];
+  //     for (var i = 0; i < 500; i++) {
+  //       attempts.push(i);
+  //     }
+  //     return P.all(attempts)
+  //       .each(function (i) {
+  //         console.warn(i);
+  //         return kinopoisk.getByIdAsync('326', optionsWithLogin.parsingOptions).then(function (result) {
+  //           expect(result).is.not.null;
+  //           assertShawshankMovie(result);
+  //         });
+  //       });
+  //   });
+  // });
+
   describe('login', function () {
     it('should successfully logged in to kinopoisk with correct credentials', function () {
-      return kinopoisk.loginAsync(KINOPOISK_USERNAME, KINOPOISK_USERPASSWORD).then(function (result) {
-        expect(result).to.be.not.empty;
-      });
+      expect(optionsWithLogin.loginData).to.be.not.empty;
     });
 
-    it('should return error with incorrect credentials', function () {
+    it.skip('should return error with incorrect credentials', function () {
       return kinopoisk.loginAsync('incorrect', 'incorrect').then(function (_) {
         throw new Error('some login credentials returned and not error');
       }).catch(function (err) {
         expect(err).is.not.null;
-        expect(err.message).is.eql('Bad credentials');
+        expect(err.message).is.contains('Вы ошиблись в логине или пароле');
       });
     });
   });
@@ -61,17 +87,8 @@ describe('Kinopoisk module', function () {
     });
 
     context('logged in', function () {
-      var optionsWithLogin;
-
-      before(function () {
-        optionsWithLogin = JSON.parse(JSON.stringify(options));
-        return kinopoisk.loginAsync(KINOPOISK_USERNAME, KINOPOISK_USERPASSWORD).then(function (result) {
-          optionsWithLogin.loginData = result;
-        });
-      });
-
       it('should successfully get movie', function () {
-        return kinopoisk.getByIdAsync('326', options.parsingOptions).then(function (result) {
+        return kinopoisk.getByIdAsync('326', optionsWithLogin.parsingOptions).then(function (result) {
           expect(result).is.not.null;
           assertShawshankMovie(result);
         });
@@ -97,15 +114,6 @@ describe('Kinopoisk module', function () {
     });
 
     context('logged in', function () {
-      var optionsWithLogin;
-
-      before(function () {
-        optionsWithLogin = JSON.parse(JSON.stringify(options));
-        return kinopoisk.loginAsync(KINOPOISK_USERNAME, KINOPOISK_USERPASSWORD).then(function (result) {
-          optionsWithLogin.loginData = result;
-        });
-      });
-
       it('should successfully search movie with EN search phrase', function () {
         return kinopoisk.searchAsync('The Shawshank Redemption', optionsWithLogin).then(function (result) {
           expect(result).to.have.length(options.limit);

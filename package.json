@@ -1,6 +1,6 @@
 {
   "name": "kinopoisk-ru",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Getting film info from kinopoisk.ru, searhing films by query. Operations support login to avoid a ban when you do many requests",
   "main": "./lib/kinopoisk.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "dependencies": {
     "bluebird": "^3.3.5",
     "cheerio": "^0.20.0",
+    "dnscache": "0.0.4",
     "iconv-lite": "^0.4.13",
     "request": "^2.72.0"
   },
